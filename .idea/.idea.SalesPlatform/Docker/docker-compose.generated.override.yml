@@ -1,0 +1,21 @@
+# This is a generated file. Not intended for manual editing.
+version: "3"
+services:
+  salesplatform:
+    build:
+      context: "C:\\Users\\krist\\Desktop\\csprojects\\SalesPlatform"
+      dockerfile: "SalesPlatform/Dockerfile"
+      target: "base"
+    command: []
+    entrypoint:
+    - "dotnet"
+    - "/app/bin/Debug/net8.0/SalesPlatform.dll"
+    environment:
+      DOTNET_USE_POLLING_FILE_WATCHER: "true"
+    image: "salesplatform:dev"
+    ports: []
+    volumes:
+    - "C:\\Users\\krist\\.nuget\\packages:/home/app/.nuget/packages"
+    - "C:\\Users\\krist\\Desktop\\csprojects\\SalesPlatform\\SalesPlatform:/app:rw"
+    - "C:\\Users\\krist\\Desktop\\csprojects\\SalesPlatform:/src:rw"
+    working_dir: "/app"

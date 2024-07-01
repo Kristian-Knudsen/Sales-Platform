@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<eFModelDiagrams>
+<eFModelDiagram dslVersion="1.0.0.0" Id="65c2826a-ac4f-4e2f-8478-cea4da8fecc1" type="Sawczyn.EFDesigner.EFModel.EFModelDiagram" absoluteBounds="0, 0, 11, 8.5" name="EFModel1" fillColor="40, 44, 52" textColor="White">
+  <modelRootMoniker Id="cba47279-0950-4257-bb2c-e4d5e72a52a4" />
+  <nestedChildShapes>
+    <classShape Id="d16d1396-64b4-4cfd-8fbf-9d16e1e3fbb2" absoluteBounds="8.0625002402812243, 2.7083334140479565, 2, 2.1396761067708328" fillColor="0, 122, 204" textColor="White" outlineColor="Black" outlineDashStyle="Solid" outlineThickness="0.01">
+      <modelClassMoniker Id="5a6974d6-1330-4938-a29c-467b7ecfd29c" />
+      <relativeChildShapes />
+      <nestedChildShapes>
+        <elementListCompartment Id="b499cc25-c409-4708-8ae5-4fce75fccd80" absoluteBounds="8.0775002402812248, 3.0183334140479565, 1.9700000000000002, 1.0185953776041665" name="AttributesCompartment" titleTextColor="Black" itemTextColor="White" />
+        <elementListCompartment Id="fc133c48-ea71-4f87-8525-cb00b6fcf701" absoluteBounds="8.0775002402812248, 4.0469287916521228, 1.9700000000000002, 0.44169108072916663" name="AssociationsCompartment" titleTextColor="Black" itemTextColor="White" />
+        <elementListCompartment Id="7e30db47-881a-41a5-b4fc-4a641d9b96c3" absoluteBounds="8.0775002402812248, 4.49861987238129, 1.9700000000000002, 0.2493896484375" name="SourcesCompartment" titleTextColor="Black" itemTextColor="White" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="b643ba59-df80-477d-8cc1-44d4955753fb" absoluteBounds="3.5625001061707735, 2.5625000763684511, 2, 2.3319775390624997" fillColor="0, 122, 204" textColor="White" outlineColor="Black" outlineDashStyle="Solid" outlineThickness="0.01">
+      <modelClassMoniker Id="c851f0ea-6ae2-4d8b-b8c0-ab3e8e6271a6" />
+      <relativeChildShapes />
+      <nestedChildShapes>
+        <elementListCompartment Id="dfb62237-9130-4a65-84a6-e515322cd408" absoluteBounds="3.5775001061707741, 2.8725000763684512, 1.9700000000000002, 1.4031982421875" name="AttributesCompartment" titleTextColor="Black" itemTextColor="White" />
+        <elementListCompartment Id="cd9476a6-67a1-4a3d-8970-0f84a248102a" absoluteBounds="3.5775001061707741, 4.2856983185559514, 1.9700000000000002, 0.2493896484375" name="AssociationsCompartment" titleTextColor="Black" itemTextColor="White" />
+        <elementListCompartment Id="72842155-977c-40a1-823e-e0d97841fc59" absoluteBounds="3.5775001061707736, 4.5450879669934512, 1.9700000000000002, 0.2493896484375" name="SourcesCompartment" titleTextColor="Black" itemTextColor="White" />
+      </nestedChildShapes>
+    </classShape>
+    <unidirectionalConnector Id="8bba740d-f053-48ea-b923-a25cdeead8d9" edgePoints="[(8.06250024028122 : 3.77817146743337); (5.56250010617077 : 3.77817146743337)]" fixedFrom="Algorithm" fixedTo="Algorithm" color="White" dashStyle="Solid" textColor="White">
+      <unidirectionalAssociationMoniker Id="53502726-5a04-4340-851f-4aea5a764f1d" />
+      <relativeChildShapes />
+      <nodes>
+        <classShapeMoniker Id="d16d1396-64b4-4cfd-8fbf-9d16e1e3fbb2" />
+        <classShapeMoniker Id="b643ba59-df80-477d-8cc1-44d4955753fb" />
+      </nodes>
+    </unidirectionalConnector>
+  </nestedChildShapes>
+</eFModelDiagram>
+</eFModelDiagrams>

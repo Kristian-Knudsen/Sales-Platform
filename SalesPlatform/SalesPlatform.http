@@ -1,0 +1,6 @@
+@SalesPlatform_HostAddress = http://localhost:5216
+
+GET {{SalesPlatform_HostAddress}}/users/
+Accept: application/json
+
+###
