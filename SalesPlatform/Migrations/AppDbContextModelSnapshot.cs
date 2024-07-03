@@ -66,9 +66,8 @@ namespace SalesPlatform.Migrations
                     b.Property<Guid>("customerId")
                         .HasColumnType("uuid");
 
-                    b.Property<string>("status")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<int>("status")
+                        .HasColumnType("integer");
 
                     b.Property<Guid>("storeId")
                         .HasColumnType("uuid");

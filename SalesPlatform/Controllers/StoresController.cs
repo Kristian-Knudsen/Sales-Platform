@@ -48,7 +48,7 @@ namespace SalesPlatform.Controllers
                     Products = s.products.Select(p => new
                     {
                         Id = p.id,
-                        /*Name = p.name,*/
+                        /*Name = pd4ab6864-f221-490d-973e-56a8a8da68ef,*/
                         Description = p.description,
                         Price = p.price,
                         IsDraft = p.isDraft,

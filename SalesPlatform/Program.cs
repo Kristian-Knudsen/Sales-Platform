@@ -6,6 +6,7 @@ using SalesPlatform.Infrastructure;
 using System.Text;
 using SalesPlatform.Utils;
 using SalesPlatform.Requests;
+using SalesPlatform.Seeders;
 
 namespace SalesPlatform
 {
@@ -54,6 +55,12 @@ namespace SalesPlatform
                 var services = scope.ServiceProvider;
                 var context = services.GetRequiredService<AppDbContext>();
                 context.Database.Migrate();
+
+                if (app.Environment.IsDevelopment())
+                {
+                    new Seeders.Seeders(context).seed();
+                    /*builder.Services.AddScoped<ISeeder, Seeders.Seeders>();*/
+                }
             }
 
             // Configure the HTTP request pipeline.
