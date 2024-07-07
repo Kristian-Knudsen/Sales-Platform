@@ -107,6 +107,51 @@ namespace SalesPlatform.Controllers
             return BadRequest("Email or password incorrect - please try again");
         }
 
+        [HttpPost("attach/{userid}/{storeid}")]
+        public async Task<IActionResult> AttachStoreToUser(Guid userid, Guid storeid)
+        {
+            Store? store = await _context.Stores.Include(store => store.employees).FirstOrDefaultAsync(s => s.id == storeid);
+            if (store == null)
+            {
+                return NotFound("Invalid store id supplied");
+            }
+
+            User? user = await _context.Users.FirstOrDefaultAsync(u => u.id == userid);
+            if (user == null)
+            {
+                return NotFound("Invalid user id supplied");
+            }
+
+            if (user.storeId != null)
+            {
+                return BadRequest("The supplied user id already have a store connected");
+            }
+            
+            // User dont have store
+            if (store.employees.Count == 0)
+            {
+                // User becomes owner
+                user.storeId = storeid;
+                user.isOwner = true;
+            }
+            else
+            {
+                // User just becomes user, but not owner
+                user.storeId = storeid;
+            }
+
+            try
+            {
+                _context.SaveChanges();
+
+                return Ok($"User: {user.id} is now connected to the store: {store.id}");
+            }
+            catch (DbUpdateException e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
         private bool UserExists(Guid id)
         {
             return _context.Users.Any(e => e.id == id);

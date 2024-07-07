@@ -17,7 +17,7 @@ namespace SalesPlatform.Infrastructure
 
             foreach (var entity in entries)
             {
-                ((BaseModel)entity.Entity).updatedAt = DateTime.Now;
+                ((BaseModel)entity.Entity).updatedAt = DateTime.UtcNow;
             }
 
             return base.SaveChanges();

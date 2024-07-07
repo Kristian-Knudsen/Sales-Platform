@@ -2,9 +2,6 @@
 import Layout from '@/components/Layout.vue';
 import OrderTable from '@/features/order/Table.vue';
 import SelectedOrder from '@/features/order/SelectedOrder.vue';
-// import { ref, onMounted } from 'vue';
-
-// const selectedOrder = ref("");
 </script>
 
 <template>

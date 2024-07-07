@@ -17,35 +17,6 @@ namespace SalesPlatform.Controllers
         {
             _context = context;
         }
-
-        // GET: api/Orders
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<GetOrders>>> GetOrder()
-        {
-            return await _context.Order.Select(o => new GetOrders
-            {
-                id = o.id,
-                status = o.status,
-                date = o.createdAt,
-                amount = o.totalPrice,
-                customerName = $"{o.customer.firstName} {o.customer.lastName}", 
-                customerEmail = o.customer.email,
-            }).ToListAsync();
-        }
-
-        // GET: api/Orders/5
-        /*[HttpGet("{id}")]
-        public async Task<ActionResult<Order>> GetOrder(Guid id)
-        {
-            var order = await _context.Order.FindAsync(id);
-
-            if (order == null)
-            {
-                return NotFound();
-            }
-
-            return order;
-        }*/
         
         // POST: api/Orders/{storeId}
         [HttpGet("{storeId}")]

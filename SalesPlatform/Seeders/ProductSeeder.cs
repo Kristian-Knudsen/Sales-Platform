@@ -18,12 +18,12 @@ namespace SalesPlatform.Seeders
                 .RuleFor(p => p.description, f => f.Commerce.ProductDescription())
                 .RuleFor(p => p.price, f =>
                 {
-                    var minPrice = 10.0m; // Adjust minimum price as needed
-                    var maxPrice = 100.0m; // Adjust maximum price as needed
-                    var randomPrice = (decimal)(f.Random.Double()) * (maxPrice - minPrice) + minPrice;
+                    const decimal minPrice = 10.0m; // Adjust minimum price as needed
+                    const decimal maxPrice = 100.0m; // Adjust maximum price as needed
+                    decimal randomPrice = (decimal)(f.Random.Double()) * (maxPrice - minPrice) + minPrice;
                     return Math.Round(randomPrice, 2); // Round to 2 decimal places (cents)
                 })
-                .RuleFor(p => p.storeId, context.Stores.Find().id)
+                .RuleFor(p => p.storeId, f => f.PickRandom(context.Stores.ToList()).id)
                 .RuleFor(p => p.isDraft, f => f.Random.Bool())
                 .RuleFor(p => p.stock, f => f.Random.Int(min: 0, max: 10000));
             

@@ -6,9 +6,9 @@ namespace SalesPlatform.Requests
     {
         public Guid id { get; set; } = Guid.Empty;
         public OrderStatus status { get; set; } = OrderStatus.AwaitingStatus;
-        public DateTime date { get; set; }
-        public decimal amount { get; set; }
-        public string customerName { get; set; } = String.Empty;
-        public string customerEmail {  get; set; } = String.Empty;
+        public DateTime createdAt { get; set; }
+        public decimal totalPrice { get; set; }
+        public string fullName { get; set; } = String.Empty;
+        public string email {  get; set; } = String.Empty;
     }
 }

@@ -9,10 +9,13 @@ const createReturnMessage = <T>(success: boolean, message: T): ResponseMessage<T
     return { success, message }
 }
 
-export const GET = <TReturnType>(url: string) : Promise<ResponseMessage<TReturnType>> => {
+export const GET = <TReturnType>(url: string, jwt?: string) : Promise<ResponseMessage<TReturnType>> => {
     return new Promise(async(resolve, reject) => {
         try {
             const response = await fetch(BASE_URL + url, {
+                headers: {
+                    "Authorization": `Bearer ${jwt || ''}`,
+                },
                 method: "GET"
             });
 
@@ -34,12 +37,15 @@ export const GET = <TReturnType>(url: string) : Promise<ResponseMessage<TReturnT
     });
 };
 
-export const POST = <TDataObject, TReturnType>(url: string, data: TDataObject) : Promise<ResponseMessage<TReturnType>> => {
+export const POST = <TDataObject, TReturnType>(url: string, data: TDataObject, jwt?: string) : Promise<ResponseMessage<TReturnType>> => {
     return new Promise(async(resolve, reject) => {
         try {
             const response = await fetch(BASE_URL + url, {
                 method: "POST",
-                headers: { "Content-Type": "application/json" },
+                headers: { 
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${jwt || ''}`,
+                },
                 body: JSON.stringify(data),
             });
 
@@ -61,10 +67,13 @@ export const POST = <TDataObject, TReturnType>(url: string, data: TDataObject) :
     });
 }
 
-export const DELETE = <TReturnType>(url: string) : Promise<ResponseMessage<TReturnType>> => {
+export const DELETE = <TReturnType>(url: string, jwt?: string) : Promise<ResponseMessage<TReturnType>> => {
     return new Promise(async(resolve, reject) => {
         try {
             const response = await fetch(BASE_URL + url, {
+                headers: {
+                    "Authorization": `Bearer ${jwt || ''}`,
+                },
                 method: "DELETE",
             });
 

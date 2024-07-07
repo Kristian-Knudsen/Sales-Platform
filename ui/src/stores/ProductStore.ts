@@ -26,12 +26,6 @@ export const useProductStore = defineStore('products', () => {
             if(response.success) {
                 productData.value = response.message;
             }
-            // } else {
-            //     toast({
-            //         title: 'Oh no - an error happend!',
-            //         description: JSON.stringify(response)
-            //     });
-            // };
             
         } catch (error) {
             toast({
