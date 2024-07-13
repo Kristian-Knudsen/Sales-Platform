@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SalesPlatform.Infrastructure;
 using SalesPlatform.Models;
-using SalesPlatform.Requests;
 
 namespace SalesPlatform.Controllers
 {
