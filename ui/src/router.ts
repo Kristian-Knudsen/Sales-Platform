@@ -5,6 +5,7 @@ import Login from '@/pages/login.vue';
 import CreateStore from '@/pages/createStore.vue';
 import Products from '@/pages/products.vue';
 import Order from '@/pages/order.vue';
+import Track from '@/pages/track.vue';
 
 const routes = [
     { path: '/', component: Index },
@@ -15,7 +16,8 @@ const routes = [
     },
     { path: '/make-store', component: CreateStore },
     { path: '/products', component: Products },
-    { path: '/orders', component: Order }
+    { path: '/orders', component: Order },
+    { path: '/track', component: Track }
 ];
 
 export const router = createRouter({

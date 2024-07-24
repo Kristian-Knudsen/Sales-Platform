@@ -9,6 +9,8 @@ import {
 } from '@/components/ui/table';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card';
 import { useOrderStore } from '@/stores';
+import { OrderStatusText } from '@/types';
+import { makeDateNice } from '@/utils';
 const orderStore = useOrderStore();
 
 const setSelectedOrder = (id: string) => {
@@ -27,50 +29,50 @@ const setSelectedOrder = (id: string) => {
 
     <CardContent>
       <Table>
-      <TableHeader>
-        <TableRow>
-          <TableHead>Customer</TableHead>
-          <!-- <TableHead class="hidden sm:table-cell">
-            Type
-          </TableHead> -->
-          <TableHead class="hidden sm:table-cell">
-            Status
-          </TableHead>
-          <TableHead class="hidden md:table-cell">
-            Date
-          </TableHead>
-          <TableHead class="text-right">
-            Amount
-          </TableHead>
-        </TableRow>
-      </TableHeader>
-      <TableBody>
-        <TableRow v-for="order in orderStore.simpleOrderData" class="bg-accent" @click="setSelectedOrder(order.id)">
-          <TableCell>
-            <div class="font-medium">
-              {{ order.fullName }}
-            </div>
-            <div class="hidden text-sm text-muted-foreground md:inline">
-              {{ order.email }}
-            </div>
-          </TableCell>
-          <TableCell class="hidden sm:table-cell">
-            {{ order.status }}
-          </TableCell>
-          <!-- <TableCell class="hidden sm:table-cell">
-            <Badge class="text-xs" variant="secondary">
-              Fulfilled
-            </Badge>
-          </TableCell> -->
-          <TableCell class="hidden md:table-cell">
-            {{ order.createdAt }}
-          </TableCell>
-          <TableCell class="text-right">
-            {{ order.totalPrice }}
-          </TableCell>
-        </TableRow>
-      </TableBody>
-    </Table>
+        <TableHeader>
+          <TableRow>
+            <TableHead class="text-center">Customer</TableHead>
+            <!-- <TableHead class="hidden sm:table-cell">
+              Type
+            </TableHead> -->
+            <TableHead class="hidden sm:table-cell text-center">
+              Status
+            </TableHead>
+            <TableHead class="hidden md:table-cell text-center">
+              Date
+            </TableHead>
+            <TableHead class="text-center">
+              Amount ($)
+            </TableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          <TableRow v-for="order in orderStore.simpleOrderData" class="bg-accent text-center" @click="setSelectedOrder(order.id)">
+            <TableCell>
+              <div class="font-medium">
+                {{ order.fullName }}
+              </div>
+              <div class="hidden text-sm text-muted-foreground md:inline">
+                {{ order.email }}
+              </div>
+            </TableCell>
+            <TableCell class="hidden sm:table-cell">
+              {{ OrderStatusText[order.status] }}
+            </TableCell>
+            <!-- <TableCell class="hidden sm:table-cell">
+              <Badge class="text-xs" variant="secondary">
+                Fulfilled
+              </Badge>
+            </TableCell> -->
+            <TableCell class="hidden md:table-cell">
+              {{ makeDateNice(order.createdAt) }}
+            </TableCell>
+            <TableCell>
+              {{ order.totalPrice }}
+            </TableCell>
+          </TableRow>
+        </TableBody>
+      </Table>
     </CardContent>
   </Card>
 </template>

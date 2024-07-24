@@ -5,8 +5,8 @@ import SelectedOrder from '@/features/order/SelectedOrder.vue';
 </script>
 
 <template>
-<Layout>
-  <div class="flex flex-col lg:flex-row h-full gap-4">
+<Layout class="h-full max-h-full">
+  <div class="flex flex-col lg:flex-row max-h-full h-full gap-4">
     <OrderTable />
     <SelectedOrder />
   </div>
