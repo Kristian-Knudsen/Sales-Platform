@@ -4,9 +4,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using SalesPlatform.Infrastructure;
 using System.Text;
-using SalesPlatform.Utils;
-using SalesPlatform.Requests;
-using SalesPlatform.Seeders;
 
 namespace SalesPlatform
 {
@@ -66,6 +63,7 @@ namespace SalesPlatform
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
+                DotNetEnv.Env.Load();
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }

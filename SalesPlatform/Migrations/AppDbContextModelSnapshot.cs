@@ -54,6 +54,117 @@ namespace SalesPlatform.Migrations
                     b.ToTable("Customer");
                 });
 
+            modelBuilder.Entity("SalesPlatform.Models.CustomerInteraction", b =>
+                {
+                    b.Property<Guid>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("createdAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid>("customerId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("customerInteractionChannelId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("customerInteractionStatusId")
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime?>("updatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.HasKey("id");
+
+                    b.HasIndex("customerId");
+
+                    b.HasIndex("customerInteractionChannelId");
+
+                    b.HasIndex("customerInteractionStatusId");
+
+                    b.ToTable("CustomerInteractions");
+                });
+
+            modelBuilder.Entity("SalesPlatform.Models.CustomerInteractionChannel", b =>
+                {
+                    b.Property<Guid>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("createdAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<bool>("isActive")
+                        .HasColumnType("boolean");
+
+                    b.Property<DateTime?>("updatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<int>("value")
+                        .HasColumnType("integer");
+
+                    b.HasKey("id");
+
+                    b.ToTable("CustomerInteractionChannels");
+                });
+
+            modelBuilder.Entity("SalesPlatform.Models.CustomerInteractionMessage", b =>
+                {
+                    b.Property<Guid>("interactionId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("id")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid?>("CustomerInteractionid")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("content")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("createdAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid>("responderId")
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime?>("updatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.HasKey("interactionId", "id");
+
+                    b.HasIndex("CustomerInteractionid");
+
+                    b.HasIndex("responderId");
+
+                    b.ToTable("CustomerInteractionMessages");
+                });
+
+            modelBuilder.Entity("SalesPlatform.Models.CustomerInteractionStatus", b =>
+                {
+                    b.Property<Guid>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("createdAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<bool>("isActive")
+                        .HasColumnType("boolean");
+
+                    b.Property<DateTime?>("updatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<int>("value")
+                        .HasColumnType("integer");
+
+                    b.HasKey("id");
+
+                    b.ToTable("CustomerInteractionStatusses");
+                });
+
             modelBuilder.Entity("SalesPlatform.Models.Order", b =>
                 {
                     b.Property<Guid>("id")
@@ -254,6 +365,56 @@ namespace SalesPlatform.Migrations
                     b.ToTable("Users");
                 });
 
+            modelBuilder.Entity("SalesPlatform.Models.CustomerInteraction", b =>
+                {
+                    b.HasOne("SalesPlatform.Models.Customer", "customer")
+                        .WithMany()
+                        .HasForeignKey("customerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("SalesPlatform.Models.CustomerInteractionChannel", "channel")
+                        .WithMany()
+                        .HasForeignKey("customerInteractionChannelId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("SalesPlatform.Models.CustomerInteractionStatus", "status")
+                        .WithMany()
+                        .HasForeignKey("customerInteractionStatusId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("channel");
+
+                    b.Navigation("customer");
+
+                    b.Navigation("status");
+                });
+
+            modelBuilder.Entity("SalesPlatform.Models.CustomerInteractionMessage", b =>
+                {
+                    b.HasOne("SalesPlatform.Models.CustomerInteraction", null)
+                        .WithMany("interactions")
+                        .HasForeignKey("CustomerInteractionid");
+
+                    b.HasOne("SalesPlatform.Models.CustomerInteraction", "interaction")
+                        .WithMany()
+                        .HasForeignKey("interactionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("SalesPlatform.Models.User", "responder")
+                        .WithMany()
+                        .HasForeignKey("responderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("interaction");
+
+                    b.Navigation("responder");
+                });
+
             modelBuilder.Entity("SalesPlatform.Models.Order", b =>
                 {
                     b.HasOne("SalesPlatform.Models.Customer", "customer")
@@ -328,6 +489,11 @@ namespace SalesPlatform.Migrations
                     b.Navigation("orders");
 
                     b.Navigation("shippingDetails");
+                });
+
+            modelBuilder.Entity("SalesPlatform.Models.CustomerInteraction", b =>
+                {
+                    b.Navigation("interactions");
                 });
 
             modelBuilder.Entity("SalesPlatform.Models.Order", b =>
