@@ -43,6 +43,19 @@ export enum OrderStatus {
     ManualVerificationNeeded
 }
 
+export const OrderStatusText = {
+    [OrderStatus.AwaitingStatus]: "Awaiting status",
+    [OrderStatus.Pending]: "Pending",
+    [OrderStatus.AwaitingPayment]: "Awaiting payment",
+    [OrderStatus.AwaitingPickAndPack]: "Awaiting Pick and Pack",
+    [OrderStatus.AwaitingShipment]: "Awaiting shipment",
+    [OrderStatus.AwaitingPickup]: "Awaiting pickup",
+    [OrderStatus.Shipped]: "Shipped",
+    [OrderStatus.Cancelled]: "Cancelled",
+    [OrderStatus.Refunded]: "Refunded",
+    [OrderStatus.ManualVerificationNeeded]: "Manual verification required"
+}
+
 export interface Customer {
     firstName: string,
     lastName: string,

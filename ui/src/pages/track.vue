@@ -1,11 +1,7 @@
 <script setup lang="ts">
-import { TresCanvas } from '@tresjs/core';
+import Scene from '@/features/track/Scene.vue';
 </script>
 
 <template>
-    <div>
-        <TresCanvas>
-
-        </TresCanvas>
-    </div>
+    <Scene />
 </template>

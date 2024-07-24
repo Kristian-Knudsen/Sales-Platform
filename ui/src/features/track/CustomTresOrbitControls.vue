@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { extend, useTresContext } from '@tresjs/core'
 import { OrbitControls } from 'three-stdlib';
-import { ref, computed } from 'vue';
+import { ref } from 'vue';
 
 const props = defineProps({
   enabled: {
@@ -13,13 +13,11 @@ const props = defineProps({
   },
 })
 
-const { camera: contextCamera, renderer } = useTresContext()
+const { renderer } = useTresContext();
 
 const orbitControlsRef = ref()
 
-const internalCamera = computed(() => props.camera ?? contextCamera.value)
-
-extend({ OrbitControls })
+extend({ OrbitControls });
 
 defineExpose({ value: orbitControlsRef })
 </script>
@@ -27,10 +25,11 @@ defineExpose({ value: orbitControlsRef })
 <template>
   <TresOrbitControls
     v-if="renderer"
-    :key="internalCamera?.uuid"
+    :key="props.camera?.uuid"
     ref="orbitControlsRef"
-    :args="[internalCamera, renderer?.domElement]"
-    :camera="internalCamera"
+    :args="[props.camera, renderer?.domElement]"
+    :camera="props.camera"
     :enabled="enabled"
+    makeDefault
   />
 </template>

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Bell, Home, Package, Package2, ShoppingCart, Users } from 'lucide-vue-next';
+import { Bell, Home, Package, Package2, ShoppingCart, Users, Warehouse } from 'lucide-vue-next';
 import { Button } from '@/components/ui/button';
 import SidebarItem from '@/components/SidebarItem.vue';
 
@@ -45,6 +45,11 @@ import SidebarItem from '@/components/SidebarItem.vue';
               text="Customer interactions"
               :icon="Users"
               link="/customers"
+            />
+            <SidebarItem 
+              text="Tracking"
+              :icon="Warehouse"
+              link="/track"
             />
             <!-- <a href="#" class="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary">
               <LineChart class="h-4 w-4" />

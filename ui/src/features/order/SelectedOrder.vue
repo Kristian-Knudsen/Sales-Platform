@@ -1,19 +1,21 @@
 <script setup lang="ts">
-import { Copy, CreditCard, MoreVertical, Truck } from 'lucide-vue-next';
+import { CreditCard, MoreVertical } from 'lucide-vue-next';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
-import { Pagination, PaginationList, PaginationNext, PaginationPrev } from '@/components/ui/pagination';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 import { Separator } from '@/components/ui/separator';
 import { useOrderStore } from '@/stores';
 import { ref, type Ref } from 'vue';
 import { getSpecificOrder } from '@/services/Orders';
 import { OrderExtended } from '@/types';
+import { makeDateNice } from '@/utils';
 import { useToast } from '@/components/ui/toast';
+import EditOrderStatusModal from '@/features/order/EditOrderStatusModal.vue';
 
 const { toast } = useToast();
 const orderStore = useOrderStore();
 const orderData: Ref<OrderExtended | undefined> = ref();
+const isEdittingOrderStatus = ref(false);
 
 orderStore.$subscribe(async (_, state) => {
     const orderId = state.selectedOrder;
@@ -33,24 +35,31 @@ orderStore.$subscribe(async (_, state) => {
 </script>
 
 <template>
-    <Card v-if="orderData" class="overflow-hidden">
+    <EditOrderStatusModal 
+        v-if="orderData" 
+        :orderId="orderData.id"
+        :current-status="orderData.id"
+        :shouldOpen="isEdittingOrderStatus" 
+        :closeFunction="() => isEdittingOrderStatus = false" 
+    />
+    <Card v-if="orderData" class="max-h-[calc(100vh-3rem)] overflow-y-scroll">
         <CardHeader class="flex flex-row items-start bg-muted/50">
             <div class="grid gap-0.5">
                 <CardTitle class="group flex items-center gap-2 text-lg">Order ID: {{ orderData.id }}
-                    <Button size="icon" variant="outline" class="h-6 w-6 opacity-0 transition-opacity group-hover:opacity-100">
+                    <!-- <Button size="icon" variant="outline" class="h-6 w-6 opacity-0 transition-opacity group-hover:opacity-100">
                         <Copy class="h-3 w-3" />
                         <span class="sr-only">Copy Order ID</span>
-                    </Button>
+                    </Button> -->
                 </CardTitle>
-            <CardDescription>Date: {{ orderData.createdAt }}</CardDescription>
+            <CardDescription>Date: {{ makeDateNice(orderData.createdAt) }}</CardDescription>
             </div>
             <div class="ml-auto flex items-center gap-1">
-            <Button size="sm" variant="outline" class="h-8 gap-1">
+            <!-- <Button size="sm" variant="outline" class="h-8 gap-1">
                 <Truck class="h-3.5 w-3.5" />
                 <span class="lg:sr-only xl:not-sr-only xl:whitespace-nowrap">
                 Track Order
                 </span>
-            </Button>
+            </Button> -->
             <DropdownMenu>
                 <DropdownMenuTrigger as-child>
                 <Button size="icon" variant="outline" class="h-8 w-8">
@@ -59,10 +68,8 @@ orderStore.$subscribe(async (_, state) => {
                 </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end">
-                <DropdownMenuItem>Edit</DropdownMenuItem>
-                <DropdownMenuItem>Export</DropdownMenuItem>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem>Trash</DropdownMenuItem>
+                <DropdownMenuItem @click="() => isEdittingOrderStatus = true">Update status</DropdownMenuItem>
+                <DropdownMenuItem>Print label</DropdownMenuItem>
                 </DropdownMenuContent>
             </DropdownMenu>
             </div>
@@ -72,7 +79,7 @@ orderStore.$subscribe(async (_, state) => {
                 <div class="font-semibold">
                     Order Details
                 </div>
-                <ul class="grid gap-3">
+                <ul class="grid gap-3 grow-1">
                     <li v-for="item in orderData.items" :key="item.name" class="flex items-center justify-between">
                         <span class="text-muted-foreground">
                             {{ item.name }} x <span>{{ item.quantity }}</span>
@@ -167,7 +174,7 @@ orderStore.$subscribe(async (_, state) => {
             </dl>
             </div>
         </CardContent>
-        <CardFooter class="flex flex-row items-center border-t bg-muted/50 px-6 py-3">
+        <!-- <CardFooter class="flex flex-row items-center border-t bg-muted/50 px-6 py-3">
             <div class="text-xs text-muted-foreground">
             Updated <time dateTime="2023-11-23">November 23, 2023</time>
             </div>
@@ -177,6 +184,6 @@ orderStore.$subscribe(async (_, state) => {
                 <PaginationNext variant="outline" class="h-6 w-6" />
             </PaginationList>
             </Pagination>
-        </CardFooter>
+        </CardFooter> -->
     </Card>
 </template>

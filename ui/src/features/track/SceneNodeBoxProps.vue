@@ -23,23 +23,13 @@ function handleModelValueUpdate() {
 
 <template>
   <div class="grid grid-cols-[auto_auto] gap-1">
-    Width:
-    <input
-      v-model="internalModelValue.properties.width"
-      class="dark:text-black"
-      @update:model-value="handleModelValueUpdate"
-    > 
-    Length:
-    <input
-      v-model="internalModelValue.properties.length"
-      class="dark:text-black"
-      @update:model-value="handleModelValueUpdate"
-    >
-    Height:
-    <input
-      v-model="internalModelValue.properties.height"
-      class="dark:text-black"
-      @update:model-value="handleModelValueUpdate"
-    >
+    <p class="text-white">Width:</p>
+    <input v-model="internalModelValue.properties.width" class="text-black" @update:model-value="handleModelValueUpdate" /> 
+    
+    <p class="text-white">Length:</p>
+    <input v-model="internalModelValue.properties.length" class="text-black" @update:model-value="handleModelValueUpdate" />
+    
+    <p class="text-white">Height:</p>
+    <input v-model="internalModelValue.properties.height" class="text-black" @update:model-value="handleModelValueUpdate" />
   </div>
 </template>

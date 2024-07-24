@@ -6,7 +6,7 @@ import { PropType, toRefs, ref, computed } from 'vue';
 const props = defineProps({
   properties: { 
     type: Object as PropType<BoxSceneNode['properties']>, 
-    default: () => ({ width: 10, height: 10, length: 10 }), 
+    default: () => ({ width: 2, height: 4, length: 5 }), 
   },
   first: { type: Boolean, default: false },
 })
