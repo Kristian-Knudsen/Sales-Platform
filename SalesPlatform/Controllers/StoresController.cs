@@ -18,27 +18,6 @@ namespace SalesPlatform.Controllers
             _context = context;
         }
 
-        // GET: api/Stores
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<Store>>> GetStores()
-        {
-            return await _context.Stores.ToListAsync();
-        }
-
-        // GET: api/Stores/<userid>
-        [HttpGet("{userid}")]
-        public async Task<ActionResult<Store>> GetStore(Guid userid)
-        {
-            var user = await _context.Users.FindAsync(userid);
-
-            if (user == null)
-            {
-                return BadRequest("Invalid user id supplied. Please try again");
-            }
-
-            return Ok(user.store);
-        }
-
         [HttpGet("{storeid}/products")]
         public async Task<ActionResult<ICollection<Product>>> GetProductsByStore(Guid storeid)
         {
@@ -128,42 +107,12 @@ namespace SalesPlatform.Controllers
                 return BadRequest($"Orderid: {orderid} or storeid: {storeid} is invalid");
             }
         }
-
-        // POST: api/Stores
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [Authorize]
-        [HttpPost]
-        public async Task<ActionResult<Store>> PostStore(CreateStore inputStore)
+        
+        // GET: api/Stores/{storeid}/order/{orderid}
+        /*[HttpGet("{storeid}/order/{orderid}/packing")]
+        public async Task<ActionResult<OrderPacking>> GetOrderPackingDetails(Guid storeid, Guid orderid)
         {
-            try
-            {
-                var user = await _context.Users.FindAsync(inputStore.userId);
-                if (user == null)
-                {
-                    return BadRequest("Invalid userid supplied! Please try again");
-                }
-
-                Store store = new Store
-                {
-                    name = inputStore.name,
-                    employees = new List<User> { user },
-                    products = new List<Product>()
-                };
-
-                _context.Stores.Add(store);
-                await _context.SaveChangesAsync();
-
-                return Ok(store);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-        }
-
-        private bool StoreExists(Guid id)
-        {
-            return _context.Stores.Any(e => e.id == id);
-        }
+            
+        }*/
     }
 }
