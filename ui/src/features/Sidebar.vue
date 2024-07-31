@@ -47,7 +47,7 @@ import SidebarItem from '@/components/SidebarItem.vue';
               link="/customers"
             />
             <SidebarItem 
-              text="Tracking"
+              text="Tracking 3D"
               :icon="Warehouse"
               link="/track"
             />
